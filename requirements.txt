@@ -1,3 +1,4 @@
 langchain
 langchain_openai
-python-env
+langchain-google-firestore
+python-dotenv
