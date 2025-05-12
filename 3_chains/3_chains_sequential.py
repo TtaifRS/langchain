@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
-from langchain.schema.runnable import RunnableLambda, RunnableSequence
+from langchain.schema.runnable import RunnableLambda
 from langchain.schema.output_parser import StrOutputParser
 from langchain_google_genai import ChatGoogleGenerativeAI
 
