@@ -26,7 +26,7 @@ def analyze_characters(characters):
   character_template = ChatPromptTemplate.from_messages(
     [
       ("system", "You are a movie critic"),
-      ("human", "Analyze the characters: {characters}. What are their strengths and weeknesses")
+      ("human", "Analyze the characters: {characters}. What are their strengths and weaknesses?")
     ]
   )
   return character_template.format_prompt(characters=characters)
