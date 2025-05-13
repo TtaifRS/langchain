@@ -6,6 +6,8 @@ from io import BytesIO
 from pathlib import Path
 import pprint
 
+os.environ.pop("SSL_CERT_FILE", None) 
+
 def generate_image(prompt, output_path):
     """
     Generate an image using Gemini 2.0 Flash Preview Image Generation model and save it to output_path.
@@ -31,6 +33,7 @@ def generate_image(prompt, output_path):
         if not api_key:
             raise ValueError("GOOGLE_IMAGE_API_KEY environment variable not set.")
         client = genai.Client(api_key=api_key)
+
         print("🔑 API client initialized.")
 
         # Request image generation
@@ -68,3 +71,48 @@ def generate_image(prompt, output_path):
         print(f"❌ Permission error: {str(e)}")
     except Exception as e:
         print(f"❌ Unexpected error: {str(e)}")
+
+# from google import genai
+# from google.genai import types
+# from PIL import Image
+# from io import BytesIO
+# from pathlib import Path
+# import os
+
+
+
+# def test_gemini_image(prompt, output_path):
+#     output_path = Path(output_path)
+#     output_path.parent.mkdir(parents=True, exist_ok=True)
+
+#     api_key = os.getenv("GOOGLE_IMAGE_API_KEY")
+#     if not api_key:
+#         raise Exception("GOOGLE_IMAGE_API_KEY not set")
+
+#     client = genai.Client(api_key=api_key)
+
+#     print("🧠 Calling Gemini...")
+#     response = client.models.generate_content(
+#         model="gemini-2.0-flash-preview-image-generation",
+#         contents=prompt,
+#         config=types.GenerateContentConfig(
+#             response_modalities=["TEXT", "IMAGE"]
+#         )
+#     )
+#     print("✅ Response received")
+
+#     for part in response.candidates[0].content.parts:
+#         if part.inline_data and part.inline_data.mime_type.startswith("image/"):
+#             print("💾 Saving image...")
+#             image = Image.open(BytesIO(part.inline_data.data))
+#             image.save(output_path.with_suffix(".png"))
+#             print("✅ Image saved")
+#             return
+
+#     print("❌ No image returned")
+
+# # Run this
+# test_gemini_image(
+#     prompt="A cartoon penguin in a snowy landscape with bright colors and a big smile.",
+#     output_path="output/test_penguin.png"
+# )

@@ -14,7 +14,7 @@ load_dotenv()
 model = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
 
 animal_name = "Penguin"
-FACT_COUNT = 2  
+FACT_COUNT = 10  
 
 base_dir = Path(__file__).parent
 output_dir = base_dir / "output" / "img" / animal_name.lower()
